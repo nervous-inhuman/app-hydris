@@ -30,7 +30,6 @@ ports:
   50051/tcp: 50051
 ports_description:
   50051/tcp: Hydris web UI and API
-webui: "http://[HOST]:[PORT:50051]"
 schema:
   world_file: str
   no_defaults: bool
