@@ -47,7 +47,7 @@ jobs:
       - name: Run Add-on Lint
         uses: homeassistant-apps/action-app-linter@v3.1
         with:
-          community: true
+          community: false
           path: "./${{ needs.information.outputs.target }}"
 
   lint-hadolint:
