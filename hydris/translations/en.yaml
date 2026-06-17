@@ -43,4 +43,3 @@ configuration:
       Defines the log level for the app/add-on wrapper.
 network:
   50051/tcp: Hydris web UI and API
-

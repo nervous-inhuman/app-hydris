@@ -15,6 +15,13 @@ COPY rootfs /
 # Run the script that installs Hydris
 RUN ["/build.sh"]
 
+HEALTHCHECK \
+    --interval=30s \
+    --timeout=5s \
+    --start-period=10s \
+    --retries=3 \
+    CMD curl -f http://localhost:50051/ || exit 1
+
 CMD ["/run.sh"]
 
 # Build arguments
@@ -44,4 +51,3 @@ LABEL \
     org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.version="${BUILD_VERSION}"
-
