@@ -1,0 +1,46 @@
+---
+configuration:
+  world_file:
+    name: World File
+    description: >-
+      Path where Hydris stores persistent world state. The default uses the
+      app/add-on configuration directory.
+  no_defaults:
+    name: Disable Built-In Defaults
+    description: >-
+      Start Hydris without loading built-in default world entities.
+  disable_local_serial:
+    name: Disable Local Serial Discovery
+    description: >-
+      Prevent Hydris from discovering local serial ports. Keep enabled unless
+      serial hardware is explicitly mapped into the app/add-on.
+  allow_netscan:
+    name: Allow Network Scanning
+    description: >-
+      Allow Hydris to scan the local network for devices.
+  disable_security:
+    name: Disable Hydris Security Policy
+    description: >-
+      Disable Hydris policy enforcement. Only enable this for trusted test
+      deployments.
+  plugins:
+    name: Plugins
+    description: >-
+      Hydris plugins to run. Entries can be local JavaScript/TypeScript files or
+      OCI image references supported by Hydris.
+  allow_paths:
+    name: Allowed Paths
+    description: >-
+      Additional filesystem paths Hydris may access, for example TLS
+      certificate paths.
+  run_parameters:
+    name: Additional Run Parameters
+    description: >-
+      Extra command-line parameters passed directly to Hydris.
+  log_level:
+    name: Log Level
+    description: >-
+      Defines the log level for the app/add-on wrapper.
+network:
+  50051/tcp: Hydris web UI and API
+

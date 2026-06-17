@@ -1,0 +1,43 @@
+---
+name: Hydris
+version: dev
+slug: hydris
+description: "Run Hydris, a coordination engine for sensors and situational awareness"
+url: "https://github.com/projectqai/hydris"
+startup: application
+init: false
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+options:
+  world_file: /config/world.yaml
+  no_defaults: false
+  disable_local_serial: true
+  allow_netscan: false
+  disable_security: false
+  plugins: []
+  allow_paths: []
+  run_parameters: []
+  log_level: info
+ports:
+  50051/tcp: 50051
+ports_description:
+  50051/tcp: Hydris web UI and API
+webui: "http://[HOST]:[PORT:50051]"
+watchdog: "tcp://[HOST]:[PORT:50051]"
+schema:
+  world_file: str
+  no_defaults: bool
+  disable_local_serial: bool
+  allow_netscan: bool
+  disable_security: bool
+  plugins:
+    - str
+  allow_paths:
+    - str
+  run_parameters:
+    - str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+
