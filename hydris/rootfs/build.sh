@@ -7,7 +7,7 @@
 
 set -eux
 
-apk add --no-cache ca-certificates tar xz
+apk add --no-cache ca-certificates nginx tar xz
 
 case "${BUILD_ARCH}" in
 "aarch64")
@@ -35,6 +35,9 @@ rm -f "${hydris_archive}"
 
 # Remove legacy cont-init.d services
 rm -rf /etc/cont-init.d
+
+# Disable the default nginx site; Hydris ingress is configured explicitly.
+rm -f /etc/nginx/http.d/default.conf
 
 # Remove s6 legacy/deprecated and unused services
 rm -f /package/admin/s6-overlay/etc/s6-rc/sources/base/contents.d/legacy-cont-init

@@ -46,5 +46,21 @@ fi
 
 bashio::log.info "Starting Hydris..."
 bashio::log.debug "hydris ${options[*]}"
-exec hydris "${options[@]}"
+hydris "${options[@]}" &
+hydris_pid="$!"
 
+bashio::log.info "Starting Hydris ingress proxy..."
+nginx -g "daemon off;" &
+nginx_pid="$!"
+
+finish() {
+    kill -TERM "${hydris_pid}" "${nginx_pid}" 2>/dev/null || true
+    wait "${hydris_pid}" "${nginx_pid}" 2>/dev/null || true
+}
+
+trap finish INT TERM
+
+wait -n "${hydris_pid}" "${nginx_pid}"
+status="$?"
+finish
+exit "${status}"

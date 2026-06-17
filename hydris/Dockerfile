@@ -20,7 +20,7 @@ HEALTHCHECK \
     --timeout=5s \
     --start-period=10s \
     --retries=3 \
-    CMD curl -f http://localhost:50051/ || exit 1
+    CMD curl -f http://localhost:8099/ || exit 1
 
 CMD ["/run.sh"]
 
