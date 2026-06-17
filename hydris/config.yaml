@@ -4,6 +4,7 @@ version: dev
 slug: hydris
 description: "Run Hydris, a coordination engine for sensors and situational awareness"
 url: "https://github.com/projectqai/hydris"
+image: ghcr.io/nervous-inhuman/{arch}-app-hydris
 init: false
 arch:
   - aarch64
