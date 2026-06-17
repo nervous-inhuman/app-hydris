@@ -28,6 +28,7 @@ jobs:
       name: ${{ steps.information.outputs.name }}
       slug: ${{ steps.information.outputs.slug }}
       target: ${{ steps.information.outputs.target }}
+      version: ${{ steps.information.outputs.version }}
     steps:
       - name: Check out code from GitHub
         uses: actions/checkout@v6
@@ -126,6 +127,8 @@ jobs:
           else
             echo "push=false" >> "$GITHUB_OUTPUT"
           fi
+          image="ghcr.io/${{ github.repository_owner }}/${{ matrix.architecture }}-${{ github.event.repository.name }}"
+          echo "tag=${image}:${{ needs.information.outputs.version }}" >> "$GITHUB_OUTPUT"
       - name: Build
         uses: docker/build-push-action@v7.2.0
         with:
@@ -135,8 +138,7 @@ jobs:
           cache-from: type=gha,scope=${{ needs.information.outputs.slug }}-${{ matrix.architecture }}
           cache-to: type=gha,mode=max,scope=${{ needs.information.outputs.slug }}-${{ matrix.architecture }}
           platforms: ${{ steps.flags.outputs.platform }}
-          tags: >-
-            ghcr.io/${{ github.repository_owner }}/${{ matrix.architecture }}-${{ github.event.repository.name }}:dev
+          tags: ${{ steps.flags.outputs.tag }}
           build-args: |
             BUILD_ARCH=${{ matrix.architecture }}
             BUILD_DATE=${{ steps.flags.outputs.date }}
@@ -144,4 +146,4 @@ jobs:
             BUILD_NAME=${{ needs.information.outputs.name }}
             BUILD_REF=${{ github.sha }}
             BUILD_REPOSITORY=${{ github.repository }}
-            BUILD_VERSION=edge
+            BUILD_VERSION=${{ needs.information.outputs.version }}

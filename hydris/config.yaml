@@ -1,6 +1,6 @@
 ---
 name: Hydris
-version: dev
+version: 0.0.23-1
 slug: hydris
 description: "Run Hydris, a coordination engine for sensors and situational awareness"
 url: "https://github.com/projectqai/hydris"
